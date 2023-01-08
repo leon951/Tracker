@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+
+namespace WorkOrderTracker
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create a dictionary to store the work orders (using the work order number as the key)
+            Dictionary<int, WorkOrder> workOrders = new Dictionary<int, WorkOrder>();
+
+            while (true)
+            {
+                // Display menu
+                Console.WriteLine("Work Order Tracker");
+                Console.WriteLine("------------------");
+                Console.WriteLine("1. New Order");
+                Console.WriteLine("2. Logs");
+                Console.WriteLine("3. #");
+                Console.WriteLine("4. Total");
+                Console.WriteLine("5. Exit");
+                Console.Write("Enter a choice: ");
+
+                // Get user input
+                string input = Console.ReadLine();
+
+                if (input == "1")
+                {
+                    // Create a new work order
+                    Console.Write("Enter the work order number: ");
+                    int number = int.Parse(console.ReadLine());
+
+                    Console.Write("Enter the stage (Design, Internal QC, Power, Entergy, Construction): ");
+                    string stage = Console.ReadLine();
+
+                    Console.Write("Enter the number of revisions: ");
+                    int revisions = int.Parse(console.ReadLine());
+
+                    Console.Write("Enter the date (mm/dd/yyyy): ");
+                    string date = Console.ReadLine();
+
+                    WorkOrder workOrder = new WorkOrder(number, date, stage, revisions);
+                    workOrders.Add(number, workOrder);
+                }
+                else if (input == "2")
+                {
+                    // View logs
+                    Console.Write("Enter the work order number: ");
+                    int number = int.Parse(Console.ReadLine());
+
+                    WorkOrder workOrder = workOrders[number];
+                    Console.WriteLine("Work Order #" + number);
+                    Console.WriteLine("Date: " + workOrder.Date);
+                    Console.WriteLine("Stage: " + workOrder.Stage);
+                    Console.WriteLine("Revisions: " + workOrder.Revisions);
+                }
+                else if (input == "3")
+                {
+                    // Display the total number of work orders
+                    Console.WriteLine("Total work orders: " + workOrders.Count);
+                }
+                else if (input == "4")
+                {
+                    // Display all work orders
+                    foreach (KeyValuePair<int, WorkOrder> entry in workOrders)
+                    {
+                        Console.WriteLine("Work Order #" + entry.Key);
+                        Console.WriteLine("Date: " + entry.Value.Date);
+                        Console.WriteLine("Stage: " + entry.Value.Stage);
+                        Console.WriteLine("Revisions: " + entry.Value.Revisions);
+                        Console.WriteLine("-------------------");
+                    }
+                }
+                else if (input == "5")
+                {
+                    // Exit the program
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Try again.");
+                }
+            }
+        }
+    }
+
